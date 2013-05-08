@@ -104,7 +104,14 @@ public class AmazonsqsRiver extends AbstractRiverComponent implements River {
 		}
 		
 		String endpoint = "https://sqs.".concat(REGION).concat(".amazonaws.com");
-		sqs = new AmazonSQSAsyncClient(new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY));
+		if(ACCESS_KEY == "null")
+		{
+			sqs = new AmazonSQSAsyncClient();
+		}
+		else
+		{
+			sqs = new AmazonSQSAsyncClient(new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY));
+		}
 		sqs.setEndpoint(endpoint);
 
 		if (DEBUG) {
